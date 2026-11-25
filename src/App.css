@@ -2,6 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--bg);
 }
 
 .app-header {
@@ -20,11 +21,11 @@
   gap: 10px;
   font-weight: 700;
   font-size: 20px;
-  color: var(--primary);
+  color: var(--primary-light);
 }
 
 .logo svg {
-  color: var(--primary);
+  color: var(--primary-light);
 }
 
 .header-subtitle {
@@ -47,7 +48,7 @@
 .agenda-panel {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 12px;
   padding: 24px;
   box-shadow: var(--shadow);
 }
@@ -55,6 +56,7 @@
 .panel-title {
   font-size: 18px;
   margin-bottom: 16px;
+  color: var(--text-h);
 }
 
 .schedule-form {
@@ -82,7 +84,7 @@
   border-radius: 8px;
   font-size: 14px;
   color: var(--text-h);
-  background: var(--surface);
+  background: var(--surface-2);
   transition: border-color 0.2s;
 }
 
@@ -99,18 +101,22 @@
   border: none;
   border-radius: 8px;
   background: var(--primary);
-  color: #fff;
-  font-weight: 600;
+  color: var(--gray-900);
+  font-weight: 700;
   font-size: 14px;
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.1s;
 }
 
 .schedule-btn:hover {
-  background: var(--primary-dark);
+  background: var(--primary-light);
+}
+
+.schedule-btn:active {
+  transform: scale(0.98);
 }
 
 .form-error {
-  color: var(--danger);
+  color: #f87171;
   font-size: 13px;
   margin: 0;
 }
@@ -133,6 +139,8 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   font-size: 14px;
+  background: var(--surface-2);
+  color: var(--text-h);
 }
 
 .periods {
@@ -145,7 +153,7 @@
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 16px;
-  background: #fafbfc;
+  background: var(--surface-2);
 }
 
 .period-header {
@@ -157,6 +165,7 @@
 
 .period-header h3 {
   font-size: 16px;
+  color: var(--primary-light);
 }
 
 .period-range {
@@ -189,7 +198,7 @@
 
 .appointment-time {
   font-weight: 600;
-  color: var(--primary);
+  color: var(--primary-light);
   min-width: 52px;
 }
 
@@ -210,8 +219,8 @@
 }
 
 .delete-btn:hover {
-  color: var(--danger);
-  background: rgba(239, 68, 68, 0.08);
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.12);
 }
 
 .empty-state {
