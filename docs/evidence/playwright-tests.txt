@@ -1,0 +1,9 @@
+
+Running 4 tests using 4 workers
+
+  ok 1 [desktop] › tests\appointment.spec.ts:6:1 › exibe a identidade HairDay e a agenda vazia (3.2s)
+  ok 3 [mobile] › tests\appointment.spec.ts:6:1 › exibe a identidade HairDay e a agenda vazia (3.8s)
+  ok 2 [desktop] › tests\appointment.spec.ts:52:1 › cria agendamentos, bloqueia horário ocupado e exclui (4.1s)
+  ok 4 [mobile] › tests\appointment.spec.ts:52:1 › cria agendamentos, bloqueia horário ocupado e exclui (4.1s)
+
+  4 passed (5.7s)

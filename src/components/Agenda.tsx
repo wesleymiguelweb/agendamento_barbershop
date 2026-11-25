@@ -1,5 +1,6 @@
 import { PERIODS } from '../utils/periods'
 import { PeriodSection } from './PeriodSection'
+import { DatePicker } from './DatePicker'
 import type { Appointment } from '../types/appointment'
 
 interface Props {
@@ -14,15 +15,20 @@ export function Agenda({ selectedDate, onDateChange, appointments, onDelete }: P
 
   return (
     <div className="agenda" data-testid="agenda">
-      <div className="agenda-header">
-        <h2>Agenda</h2>
-        <input
-          type="date"
+      <header className="agenda-header">
+        <div className="agenda-heading">
+          <h2>Sua agenda</h2>
+          <p className="agenda-subtitle">
+            Consulte os seus cortes de cabelo agendados por dia
+          </p>
+        </div>
+        <DatePicker
           value={selectedDate}
-          onChange={(e) => onDateChange(e.target.value)}
-          data-testid="agenda-date"
+          onChange={onDateChange}
+          testId="agenda-date"
+          label="Data da agenda"
         />
-      </div>
+      </header>
 
       <div className="periods">
         {PERIODS.map((period) => (

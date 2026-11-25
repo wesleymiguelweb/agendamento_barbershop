@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { UserSquareIcon } from '@phosphor-icons/react'
 import { PERIODS, getPeriodId } from '../utils/periods'
 import { todayISO } from '../utils/date'
+import { DatePicker } from './DatePicker'
 import type { Appointment } from '../types/appointment'
 
 interface Props {
@@ -8,25 +10,23 @@ interface Props {
   onSchedule: (data: { client: string; date: string; time: string }) => void
 }
 
-function UserIcon() {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 256 256"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M208,208a8,8,0,0,1-8,8H56a8,8,0,0,1-8-8,80,80,0,0,1,45.07-72.18,48,48,0,1,1,69.86,0A80,80,0,0,1,208,208Z" />
-    </svg>
-  )
-}
-
 export function ScheduleForm({ appointments, onSchedule }: Props) {
   const [client, setClient] = useState('')
   const [date, setDate] = useState(todayISO())
   const [time, setTime] = useState('')
   const [error, setError] = useState('')
+
+  const bookedForDate = new Set(
+    appointments.filter((a) => a.date === date).map((a) => a.time),
+  )
+
+  function handleDateChange(value: string) {
+    setDate(value)
+    setError('')
+    if (appointments.some((a) => a.date === value && a.time === time)) {
+      setTime('')
+    }
+  }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -46,10 +46,7 @@ export function ScheduleForm({ appointments, onSchedule }: Props) {
       setError('Horário inválido.')
       return
     }
-    const duplicate = appointments.some(
-      (a) => a.date === date && a.time === time,
-    )
-    if (duplicate) {
+    if (bookedForDate.has(time)) {
       setError('Este horário já está agendado para esta data.')
       return
     }
@@ -59,20 +56,18 @@ export function ScheduleForm({ appointments, onSchedule }: Props) {
     setError('')
   }
 
-  const bookedForDate = new Set(
-    appointments.filter((a) => a.date === date).map((a) => a.time),
-  )
-
   return (
     <form className="schedule-form" onSubmit={handleSubmit} data-testid="schedule-form">
       <div className="form-group">
-        <label className="form-label">Data</label>
-        <input
-          type="date"
+        <label className="form-label" htmlFor="appointment-date">
+          Data
+        </label>
+        <DatePicker
           value={date}
-          onChange={(e) => setDate(e.target.value)}
-          data-testid="date-input"
-          className="date-input"
+          onChange={handleDateChange}
+          testId="date-input"
+          inputId="appointment-date"
+          label="Data"
         />
       </div>
 
@@ -126,12 +121,17 @@ export function ScheduleForm({ appointments, onSchedule }: Props) {
       </div>
 
       <div className="form-group">
-        <label className="form-label">Cliente</label>
+        <label className="form-label" htmlFor="appointment-client">
+          Cliente
+        </label>
         <div className="client-input">
-          <span className="client-input-icon">
-            <UserIcon />
-          </span>
+          <UserSquareIcon
+            size={20}
+            className="client-input-icon"
+            aria-hidden="true"
+          />
           <input
+            id="appointment-client"
             type="text"
             placeholder="Nome do cliente"
             value={client}

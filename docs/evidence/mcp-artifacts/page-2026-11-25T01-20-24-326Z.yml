@@ -1,0 +1,63 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - img "HairDay" [ref=e5]
+  - main [ref=e6]:
+    - complementary [ref=e7]:
+      - heading "Agende um atendimento" [level=2] [ref=e8]
+      - paragraph [ref=e9]: Selecione data, horário e informe o nome do cliente para criar o agendamento
+      - generic [ref=e10]:
+        - generic [ref=e11]:
+          - generic [ref=e12]: Data
+          - textbox "Data" [ref=e16] [cursor=pointer]: 2026-11-24
+        - generic [ref=e19]:
+          - generic [ref=e20]: Horários
+          - generic [ref=e21]:
+            - generic [ref=e22]: Manhã
+            - generic [ref=e23]:
+              - button "09:00" [ref=e24] [cursor=pointer]
+              - button "10:00" [ref=e25] [cursor=pointer]
+              - button "11:00" [ref=e26] [cursor=pointer]
+              - button "12:00" [ref=e27] [cursor=pointer]
+          - generic [ref=e28]:
+            - generic [ref=e29]: Tarde
+            - generic [ref=e30]:
+              - button "13:00" [ref=e31] [cursor=pointer]
+              - button "14:00" [ref=e32] [cursor=pointer]
+              - button "15:00" [ref=e33] [cursor=pointer]
+              - button "16:00" [ref=e34] [cursor=pointer]
+              - button "17:00" [ref=e35] [cursor=pointer]
+              - button "18:00" [ref=e36] [cursor=pointer]
+          - generic [ref=e37]:
+            - generic [ref=e38]: Noite
+            - generic [ref=e39]:
+              - button "19:00" [ref=e40] [cursor=pointer]
+              - button "20:00" [ref=e41] [cursor=pointer]
+              - button "21:00" [ref=e42] [cursor=pointer]
+          - combobox [aria-hidden] [ref=e43]
+        - generic [ref=e44]:
+          - generic [ref=e45]: Cliente
+          - textbox "Cliente" [ref=e49]:
+            - /placeholder: Nome do cliente
+        - button "Agendar" [ref=e50] [cursor=pointer]
+    - generic [ref=e52]:
+      - generic [ref=e53]:
+        - generic [ref=e54]:
+          - heading "Sua agenda" [level=2] [ref=e55]
+          - paragraph [ref=e56]: Consulte os seus cortes de cabelo agendados por dia
+        - textbox "Data da agenda" [ref=e60] [cursor=pointer]: 2026-11-24
+      - generic [ref=e63]:
+        - generic [ref=e64]:
+          - generic [ref=e65]:
+            - heading "Manhã" [level=3] [ref=e66]
+            - generic [ref=e69]: 09h-12h
+          - paragraph [ref=e71]: Você ainda não tem agendamentos cadastrados nesse período.
+        - generic [ref=e72]:
+          - generic [ref=e73]:
+            - heading "Tarde" [level=3] [ref=e74]
+            - generic [ref=e77]: 13h-18h
+          - paragraph [ref=e79]: Você ainda não tem agendamentos cadastrados nesse período.
+        - generic [ref=e80]:
+          - generic [ref=e81]:
+            - heading "Noite" [level=3] [ref=e82]
+            - generic [ref=e85]: 19h-21h
+          - paragraph [ref=e87]: Você ainda não tem agendamentos cadastrados nesse período.

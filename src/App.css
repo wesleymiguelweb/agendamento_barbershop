@@ -5,118 +5,137 @@
   background: var(--bg);
 }
 
+/* Header with the official HairDay logo (gold scissors on graphite) */
 .app-header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 16px 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  align-self: flex-start;
+  background: var(--gray-600);
+  padding: 12px 20px;
+  border-bottom-right-radius: 12px;
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--primary-light);
-}
-
-.logo svg {
-  color: var(--primary-light);
-}
-
-.header-subtitle {
-  color: var(--text-muted);
-  font-size: 14px;
+  display: block;
+  width: 139px;
+  height: 56px;
 }
 
 .app-main {
   flex: 1;
   display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 24px;
-  padding: 24px 32px;
-  max-width: 1200px;
+  grid-template-columns: minmax(320px, 420px) 1fr;
+  gap: 12px;
+  padding: 12px;
   width: 100%;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
-.form-panel,
-.agenda-panel {
-  background: var(--surface);
-  border: 1px solid var(--border);
+/* Form card */
+.form-panel {
+  background: var(--gray-700);
   border-radius: 12px;
-  padding: 24px;
-  box-shadow: var(--shadow);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: fit-content;
 }
 
 .panel-title {
-  font-size: 18px;
-  margin-bottom: 4px;
-  color: var(--text-h);
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  color: var(--gray-100);
 }
 
 .panel-subtitle {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--gray-300);
+  margin: 4px 0 0;
 }
 
 .schedule-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 32px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .form-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--gray-200);
 }
 
 .form-hint {
-  font-size: 12px;
-  color: var(--text-muted);
+  font-size: 14px;
+  color: var(--gray-300);
   margin: 0;
 }
 
-.date-input {
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 14px;
-  color: var(--text-h);
-  background: var(--surface-2);
+/* Date picker */
+.date-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid var(--gray-500);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s;
 }
 
-.date-input:focus {
+.date-picker:focus-within {
+  border-color: var(--primary-dark);
+}
+
+.date-picker-icon {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.date-picker-caret {
+  color: var(--gray-300);
+  flex-shrink: 0;
+}
+
+.date-picker-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
   outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--primary-soft);
+  background: transparent;
+  color: var(--gray-200);
+  font-family: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  color-scheme: dark;
 }
 
+.date-picker-input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* Time slots */
 .time-period {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+  margin-top: 8px;
 }
 
 .time-period-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--gray-200);
 }
 
 .time-slots {
@@ -126,66 +145,261 @@
 }
 
 .time-slot {
-  padding: 8px 14px;
+  padding: 8px 20px;
   border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--surface-2);
-  color: var(--text-h);
-  font-size: 13px;
-  font-weight: 500;
-  transition: all 0.15s;
+  border: 1px solid var(--gray-500);
+  background: var(--gray-600);
+  color: var(--gray-200);
+  font-size: 14px;
+  line-height: 20px;
+  transition: background 0.2s, border-color 0.2s;
 }
 
 .time-slot:hover:not(:disabled) {
-  border-color: var(--primary);
-  color: var(--primary-light);
+  background: var(--gray-500);
 }
 
-.time-slot--selected {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: var(--gray-900);
-  font-weight: 700;
+.time-slot:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
-.time-slot--disabled {
-  opacity: 0.35;
+.time-slot--selected,
+.time-slot--selected:hover:not(:disabled) {
+  background: var(--gray-600);
+  border-color: var(--primary);
+  color: var(--gray-100);
+}
+
+.time-slot--disabled,
+.time-slot--disabled:hover {
+  background: transparent;
+  border-color: var(--gray-600);
+  color: var(--gray-400);
   cursor: not-allowed;
 }
 
+/* Client input */
 .client-input {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--surface-2);
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--gray-500);
+  border-radius: 12px;
+  background: transparent;
   transition: border-color 0.2s;
 }
 
 .client-input:focus-within {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--primary-soft);
+  border-color: var(--primary-dark);
 }
 
 .client-input-icon {
-  color: var(--primary-light);
-  display: inline-flex;
-  align-items: center;
+  color: var(--primary);
+  flex-shrink: 0;
 }
 
 .client-input input {
   flex: 1;
+  min-width: 0;
   border: none;
   background: transparent;
   outline: none;
-  color: var(--text-h);
-  font-size: 14px;
+  color: var(--gray-200);
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .client-input input::placeholder {
   color: var(--gray-400);
+}
+
+/* Primary button */
+.schedule-btn {
+  padding: 18px 24px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: var(--primary);
+  color: var(--gray-900);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: border-color 0.2s;
+}
+
+.schedule-btn:hover {
+  border-color: var(--primary-light);
+}
+
+.schedule-btn:focus-visible {
+  outline: 2px solid var(--primary-light);
+  outline-offset: 2px;
+}
+
+.form-error {
+  color: #f87171;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Agenda */
+.agenda-panel {
+  display: flex;
+  justify-content: center;
+  padding: 32px 8px;
+}
+
+.agenda {
+  width: 100%;
+  max-width: 682px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.agenda-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.agenda-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.agenda-header h2 {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  color: var(--gray-100);
+}
+
+.agenda-subtitle {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--gray-300);
+  margin: 0;
+}
+
+.agenda-header .date-picker {
+  width: auto;
+  min-width: 168px;
+}
+
+.periods {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.period {
+  border: 1px solid var(--gray-600);
+  border-radius: 8px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.period-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--gray-600);
+}
+
+.period-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--gray-300);
+}
+
+.period-icon {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.period-range {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--gray-400);
+}
+
+.period-body {
+  padding: 20px;
+}
+
+.appointment-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.appointment-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 4px 0;
+}
+
+.appointment-time {
+  min-width: 52px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+  color: var(--gray-100);
+}
+
+.appointment-client {
+  flex: 1;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--gray-200);
+  overflow-wrap: anywhere;
+}
+
+.delete-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--primary);
+  transition: color 0.2s;
+}
+
+.delete-btn:hover {
+  color: var(--primary-dark);
+}
+
+.delete-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.empty-state {
+  color: var(--gray-300);
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
 }
 
 .sr-only {
@@ -200,167 +414,48 @@
   border: 0;
 }
 
-.form-group input,
-.form-group select {
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 14px;
-  color: var(--text-h);
-  background: var(--surface-2);
-  transition: border-color 0.2s;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--primary-soft);
-}
-
-.schedule-btn {
-  margin-top: 4px;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  background: var(--primary);
-  color: var(--gray-900);
-  font-weight: 700;
-  font-size: 14px;
-  transition: background 0.2s, transform 0.1s;
-}
-
-.schedule-btn:hover {
-  background: var(--primary-light);
-}
-
-.schedule-btn:active {
-  transform: scale(0.98);
-}
-
-.form-error {
-  color: #f87171;
-  font-size: 13px;
-  margin: 0;
-}
-
-.agenda-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-}
-
-.agenda-header h2 {
-  font-size: 20px;
-}
-
-.agenda-header input[type='date'] {
-  padding: 8px 10px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 14px;
-  background: var(--surface-2);
-  color: var(--text-h);
-}
-
-.periods {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.period {
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 16px;
-  background: var(--surface-2);
-}
-
-.period-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.period-header h3 {
-  font-size: 16px;
-  color: var(--primary-light);
-}
-
-.period-range {
-  font-size: 12px;
-  color: var(--text-muted);
-  background: var(--surface);
-  padding: 2px 8px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-}
-
-.appointment-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.appointment-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-}
-
-.appointment-time {
-  font-weight: 600;
-  color: var(--primary-light);
-  min-width: 52px;
-}
-
-.appointment-client {
-  flex: 1;
-  color: var(--text-h);
-}
-
-.delete-btn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  padding: 4px;
-  display: inline-flex;
-  align-items: center;
-  border-radius: 6px;
-  transition: color 0.2s, background 0.2s;
-}
-
-.delete-btn:hover {
-  color: #f87171;
-  background: rgba(239, 68, 68, 0.12);
-}
-
-.empty-state {
-  color: var(--text-muted);
-  font-size: 13px;
-  font-style: italic;
-  margin: 0;
-  padding: 8px 0;
-}
-
-@media (max-width: 860px) {
+@media (max-width: 900px) {
   .app-main {
     grid-template-columns: 1fr;
+  }
+
+  .form-panel {
+    padding: 24px;
+  }
+
+  .agenda-panel {
+    padding: 16px 0 32px;
+  }
+}
+
+@media (max-width: 560px) {
+  .app-header {
+    padding: 10px 16px;
+  }
+
+  .logo {
+    width: 118px;
+    height: auto;
+  }
+
+  .form-panel {
+    padding: 20px;
+  }
+
+  .agenda-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .agenda-header .date-picker {
+    width: 100%;
+  }
+
+  .period-body {
     padding: 16px;
   }
 
-  .app-header {
-    padding: 12px 16px;
+  .form-error {
+    font-size: 13px;
   }
 }
