@@ -37,7 +37,11 @@ function App() {
       <Header />
       <main className="app-main">
         <aside className="form-panel">
-          <h2 className="panel-title">Novo agendamento</h2>
+          <h2 className="panel-title">Agende um atendimento</h2>
+          <p className="panel-subtitle">
+            Selecione data, horário e informe o nome do cliente para criar o
+            agendamento
+          </p>
           <ScheduleForm
             appointments={appointments}
             onSchedule={handleSchedule}

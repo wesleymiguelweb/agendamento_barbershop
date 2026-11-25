@@ -1,11 +1,25 @@
 import { useState } from 'react'
-import { ALL_HOURS, getPeriodId } from '../utils/periods'
+import { PERIODS, getPeriodId } from '../utils/periods'
 import { todayISO } from '../utils/date'
 import type { Appointment } from '../types/appointment'
 
 interface Props {
   appointments: Appointment[]
   onSchedule: (data: { client: string; date: string; time: string }) => void
+}
+
+function UserIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 256 256"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M208,208a8,8,0,0,1-8,8H56a8,8,0,0,1-8-8,80,80,0,0,1,45.07-72.18,48,48,0,1,1,69.86,0A80,80,0,0,1,208,208Z" />
+    </svg>
+  )
 }
 
 export function ScheduleForm({ appointments, onSchedule }: Props) {
@@ -16,16 +30,16 @@ export function ScheduleForm({ appointments, onSchedule }: Props) {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!client.trim()) {
-      setError('Informe o nome do cliente.')
-      return
-    }
     if (!date) {
       setError('Selecione uma data.')
       return
     }
     if (!time) {
       setError('Selecione um horário.')
+      return
+    }
+    if (!client.trim()) {
+      setError('Informe o nome do cliente.')
       return
     }
     if (!getPeriodId(time)) {
@@ -52,43 +66,79 @@ export function ScheduleForm({ appointments, onSchedule }: Props) {
   return (
     <form className="schedule-form" onSubmit={handleSubmit} data-testid="schedule-form">
       <div className="form-group">
-        <label htmlFor="client">Cliente</label>
+        <label className="form-label">Data</label>
         <input
-          id="client"
-          type="text"
-          placeholder="Nome do cliente"
-          value={client}
-          onChange={(e) => setClient(e.target.value)}
-          data-testid="client-input"
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="date">Data</label>
-        <input
-          id="date"
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
           data-testid="date-input"
+          className="date-input"
         />
       </div>
 
       <div className="form-group">
-        <label htmlFor="time">Horário</label>
+        <span className="form-label">Horários</span>
+        {!date && (
+          <p className="form-hint">Selecione uma data para ver os horários.</p>
+        )}
+        {PERIODS.map((period) => (
+          <div key={period.id} className="time-period">
+            <span className="time-period-label">{period.label}</span>
+            <div className="time-slots">
+              {period.hours.map((h) => {
+                const disabled = !date || bookedForDate.has(h)
+                const selected = time === h
+                return (
+                  <button
+                    key={h}
+                    type="button"
+                    disabled={disabled}
+                    onClick={() => setTime(h)}
+                    className={`time-slot${selected ? ' time-slot--selected' : ''}${
+                      disabled ? ' time-slot--disabled' : ''
+                    }`}
+                    data-testid="time-slot"
+                    aria-pressed={selected}
+                  >
+                    {h}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        ))}
+
         <select
-          id="time"
           value={time}
           onChange={(e) => setTime(e.target.value)}
           data-testid="time-select"
+          className="sr-only"
+          aria-hidden="true"
+          tabIndex={-1}
         >
           <option value="">Selecione um horário</option>
-          {ALL_HOURS.map((h) => (
-            <option key={h} value={h} disabled={bookedForDate.has(h)}>
-              {h} {bookedForDate.has(h) ? '(ocupado)' : ''}
+          {PERIODS.flatMap((p) => p.hours).map((h) => (
+            <option key={h} value={h} disabled={!date || bookedForDate.has(h)}>
+              {h}
             </option>
           ))}
         </select>
+      </div>
+
+      <div className="form-group">
+        <label className="form-label">Cliente</label>
+        <div className="client-input">
+          <span className="client-input-icon">
+            <UserIcon />
+          </span>
+          <input
+            type="text"
+            placeholder="Nome do cliente"
+            value={client}
+            onChange={(e) => setClient(e.target.value)}
+            data-testid="client-input"
+          />
+        </div>
       </div>
 
       {error && (
